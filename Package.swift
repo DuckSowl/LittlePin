@@ -3,18 +3,18 @@
 import PackageDescription
 
 let package = Package(
-    name: "LittlePin",
+    name: "Pin",
     platforms: [
         .iOS(.v10),
     ],
     products: [
         .library(
-            name: "LittlePin",
-            targets: ["LittlePin"]),
+            name: "Pin",
+            targets: ["Pin"]),
     ],
     targets: [
         .target(
-            name: "LittlePin",
+            name: "Pin",
             dependencies: []),
     ]
 )
