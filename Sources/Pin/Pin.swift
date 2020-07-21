@@ -97,7 +97,7 @@ public struct Pin {
     }
     
     func removeConstraints() {
-        var viewChain: UIView? = view
+        var viewChain: UIView? = view?.superview
         while let ancestorView = viewChain {
             ancestorView.removeConstraints(ancestorView.constraints.filter {
                 return $0.firstItem as? UIView == view || $0.secondItem as? UIView == view
