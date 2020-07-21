@@ -137,7 +137,7 @@ public extension Pin {
     public func add(_ constraints: [NSLayoutConstraint]) -> Pin {
         return Pin(view: view,
                    constraints: self.constraints.withAppend(contentsOf: constraints),
-                   willUnpin: willUnpin))
+                   willUnpin: willUnpin)
     }
     
     // MARK: - Remove all existing constraints
