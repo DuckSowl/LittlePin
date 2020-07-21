@@ -13,7 +13,7 @@ public struct Pin {
     
     weak var view: UIView?
     
-    private var willUnpin: Bool = false
+    var willUnpin: Bool = false
     
     public private(set) var constraints = [NSLayoutConstraint]()
     
