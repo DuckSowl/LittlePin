@@ -13,6 +13,8 @@ public struct Pin {
     
     weak var view: UIView?
     
+    private var willUnpin: Bool = false
+    
     public private(set) var constraints = [NSLayoutConstraint]()
     
     // MARK: - Initializers
@@ -21,9 +23,11 @@ public struct Pin {
         self.view = view
     }
     
-    init(view: UIView?, constraints: [NSLayoutConstraint]) {
+    init(view: UIView?, constraints: [NSLayoutConstraint],
+         willUnpin: Bool) {
         self.view = view
         self.constraints = constraints
+        self.willUnpin = willUnpin
     }
     
     // MARK: - Constraint appending functions
@@ -89,6 +93,16 @@ public struct Pin {
         case .greater:
             return add(view[keyPath: from].constraint(greaterThanOrEqualTo: view[keyPath: to],
                                                       multiplier: multiplier))
+        }
+    }
+    
+    func removeConstraints() {
+        var viewChain: UIView? = view
+        while let ancestorView = viewChain {
+            ancestorView.removeConstraints(ancestorView.constraints.filter {
+                return $0.firstItem as? UIView == view || $0.secondItem as? UIView == view
+            })
+            viewChain = viewChain?.superview
         }
     }
     

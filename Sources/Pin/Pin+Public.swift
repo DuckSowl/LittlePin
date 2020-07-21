@@ -130,17 +130,30 @@ public extension Pin {
     // MARK: - Existing constraints
     
     public func add(_ constraint: NSLayoutConstraint) -> Pin {
-        return Pin(view: view, constraints: constraints + [constraint])
+        return Pin(view: view, constraints: constraints.withAppend(constraint),
+                   willUnpin: willUnpin)
     }
     
     public func add(_ constraints: [NSLayoutConstraint]) -> Pin {
-        return Pin(view: view, constraints: self.constraints.withAppend(contentsOf: constraints))
+        return Pin(view: view,
+                   constraints: self.constraints.withAppend(contentsOf: constraints),
+                   willUnpin: willUnpin))
+    }
+    
+    // MARK: - Remove all existing constraints
+    
+    public func unpin() -> Pin {
+        return Pin(view: view, constraints: constraints, willUnpin: true)
     }
     
     // MARK: - Activation
     
     public var activate: Void {
-        view?.translatesAutoresizingMaskIntoConstraints = false
+        guard let view = view else { return }
+        
+        if willUnpin { removeConstraints() }
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(constraints)
     }
 }
