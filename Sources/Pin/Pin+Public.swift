@@ -76,7 +76,7 @@ public extension Pin {
     public func before(_ other: UIView, be relation: Relation = .equal,
                        _ constant: CGFloat = 0) -> Pin {
         addConstraint(toView: other, from: \.rightAnchor, to: \.leftAnchor,
-                      with: relation, constant: constant)
+                      with: relation, constant: -constant)
     }
     
     public func after(_ other: UIView, be relation: Relation = .equal,
