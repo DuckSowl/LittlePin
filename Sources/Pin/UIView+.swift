@@ -11,5 +11,13 @@ public extension UIView {
     public var pin: Pin {
         return Pin(view: self)
     }
+    
+    public func pin(super superView: UIView) -> Pin {
+        if !self.isDescendant(of: superView) {
+            superView.addSubview(self)
+        }
+        
+        return self.pin
+    }
 }
 
