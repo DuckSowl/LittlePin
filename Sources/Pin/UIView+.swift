@@ -8,9 +8,8 @@
 import UIKit
 
 public extension UIView {
-    public var pin: Pin {
-        return Pin(view: self)
-    }
+    public var pin: Pin {  Pin(view: self) }
+    public var unpin: Pin { pin.unpin() }
     
     public func pin(super superView: UIView) -> Pin {
         if !self.isDescendant(of: superView) {
